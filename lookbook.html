@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RHB Lookbook</title>
+   <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <link rel="stylesheet" href="swiper.min.css">
+  <!-- <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"> -->
+  
+  <style>
+    html body{
+      background-color: #000;
+    }
+    .swiper-container {
+      width: 100%;
+      max-width: 600px;
+      height: 80vh;
+      background: #000;
+    }
+
+    .swiper-container img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .swiper-slide{
+      width: 100px;
+      height: auto;
+      text-align: center;
+      overflow: hidden;
+      opacity: .5;
+    }
+    .swiper-thumbs {
+      width: 100%;
+      max-width: 600px;
+      height: 120px;
+      margin: 20px auto;
+      overflow: hidden;
+    }
+
+    .swiper-thumbs img{
+      width: 100%;
+      height: 15vh;
+      object-fit: cover;
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+
+    .swiper-slide-active{
+      opacity: 1;
+    }
+    .swiper-button-prev, .swiper-button-prev:before{
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M0%2C22L22%2C0l2.1%2C2.1L4.2%2C22l19.9%2C19.9L22%2C44L0%2C22L0%2C22L0%2C22z'%20fill%3D'%23fff'%2F%3E%3C%2Fsvg%3E") !important;
+    }
+    .swiper-button-next, .swiper-button-next:before {
+      background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2027%2044'%3E%3Cpath%20d%3D'M27%2C22L27%2C22L5%2C44l-2.1-2.1L22.8%2C22L2.9%2C2.1L5%2C0L27%2C22L27%2C22z'%20fill%3D'%23fff'%2F%3E%3C%2Fsvg%3E") !important;
+    }
+    .swiper-button-prev, .swiper-button-next {
+      width: 15px !important;;
+      height: 35px !important;;
+      background-size: 15px 35px !important;;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="hamburger" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <a href="/" class="logo">
+        <img src="images/logo.png" alt="RHB Logo" style="max-height: 80px;">
+      </a>
+    </div>
+  </nav>
+  <div class="menu-drawer" id="menuDrawer">
+    <a class="menu-link" href="index.html">Home</a>
+    <a class="menu-link" href="https://shop.rhb.co.com">Shop</a>
+    <a class="menu-link" href="lookbook.html">Gallery</a>
+    <a class="menu-link" href="contact.html">Contact</a>
+    <a class="menu-link" href="about.html">About Us</a>
+
+    
+    <!-- Login/Register链接 -->
+    <a class="drawer-menu__link fs-body-base fs-body-large-ns" href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2"> 
+      Login/Register 
+    </a>
+    
+    <!-- Instagram链接 -->
+    <div class="instagram-container">
+      <a href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2" title="Antidote の Instagram" target="_blank" class="instagram-link"> 
+        <span class="icon"> 
+          <svg width="100%" viewBox="0 0 24 24"> 
+            <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" fill="currentColor"></path> 
+          </svg> 
+        </span> 
+      </a>
+    </div>
+  </div>
+  
+  <!-- 主内容 -->
+  <div class="lookbook-header">
+    <div class="lookbook-title" id="lookbookTitle">LOOKBOOK</div>
+    <a href="movie.html" class="movie-link" id="movieLink">MOVIE</a>
+  </div>
+  
+  <div class="swiper-container">
+      <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <img src="images/000_2510.JPG" alt="Look 1" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/000_2551.JPG" alt="Look 2" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/000_2345.JPG" alt="Look 3" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/000_2368.JPG" alt="Look 4" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/000_2123.JPG" alt="Look 5" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images/000_2183.JPG" alt="Look 6" />
+          </div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+      
+      <!-- 如果需要导航按钮 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+      
+  </div>
+
+  <div class="swiper-thumbs">
+    <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="images/000_2510.JPG" alt="Look 1" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/000_2551.JPG" alt="Look 2" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/000_2345.JPG" alt="Look 3" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/000_2368.JPG" alt="Look 4" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/000_2123.JPG" alt="Look 5" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images/000_2183.JPG" alt="Look 6" />
+        </div>
+    </div>
+</div>
+<script src="swiper.min.js"> </script>
+<!-- 菜单JS -->
+<script>
+    
+    document.addEventListener('DOMContentLoaded', function () {
+      var slideCount = parseInt(25, 10);
+      var loopedSlides = slideCount + 3;
+
+      var slider = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        autoplay: {
+          delay: 5000,
+          disableOnInteraction: true
+        },
+        loop: true,
+        loopedSlides: loopedSlides,
+        centeredSlides: true,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+          cssMode:true
+        }
+      });
+
+      var thumbs = new Swiper('.swiper-thumbs', {
+        slidesPerView: 'auto',
+        spaceBetween: 10,
+        loop: true,
+        loopedSlides: loopedSlides,
+        centeredSlides: true,
+        slideToClickedSlide: true,
+        touchRatio: 0.2,
+      });
+
+      slider.controller.control = thumbs;
+      thumbs.controller.control = slider;
+    });
+
+    
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDrawer = document.getElementById('menuDrawer');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuOpen = !menuOpen;
+      menuDrawer.classList.toggle('active', menuOpen);
+    });
+    menuDrawer.addEventListener('click', function(e) {
+      menuDrawer.classList.remove('active');
+      menuOpen = false;
+      e.stopPropagation();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape" && menuOpen) {
+        menuDrawer.classList.remove('active');
+        menuOpen = false;
+      }
+    });
+
+    // 标题交互效果
+    const lookbookTitle = document.getElementById('lookbookTitle');
+    const movieLink = document.getElementById('movieLink');
+
+    // 当鼠标悬停在LOOKBOOK上时，MOVIE变透明
+    lookbookTitle.addEventListener('mouseenter', function() {
+      movieLink.style.opacity = '0.3';
+    });
+    lookbookTitle.addEventListener('mouseleave', function() {
+      movieLink.style.opacity = '1';
+    });
+
+    // 当鼠标悬停在MOVIE上时，LOOKBOOK变透明
+    movieLink.addEventListener('mouseenter', function() {
+      lookbookTitle.style.opacity = '0.3';
+    });
+    movieLink.addEventListener('mouseleave', function() {
+      lookbookTitle.style.opacity = '1';
+    });
+
+    // 炫酷鼠标坐标追踪
+    const mouseLocation = document.getElementById('mouseLocation');
+    const mouseX = document.getElementById('mouseX');
+    const mouseY = document.getElementById('mouseY');
+    let isMouseMoving = false;
+    let mouseTimeout;
+
+    // 鼠标移动事件
+    document.addEventListener('mousemove', function(e) {
+      // 更新坐标
+      mouseX.textContent = e.clientX;
+      mouseY.textContent = e.clientY;
+      
+      // 显示坐标面板
+      if (!isMouseMoving) {
+        mouseLocation.classList.add('show');
+        isMouseMoving = true;
+      }
+      
+      // 创建鼠标轨迹效果
+      createMouseTrail(e.clientX, e.clientY);
+      
+      // 清除之前的定时器
+      clearTimeout(mouseTimeout);
+      
+      // 设置隐藏定时器
+      mouseTimeout = setTimeout(() => {
+        mouseLocation.classList.remove('show');
+        isMouseMoving = false;
+      }, 2000);
+    });
+
+    // 创建鼠标轨迹效果
+    function createMouseTrail(x, y) {
+      const trail = document.createElement('div');
+      trail.className = 'mouse-trail';
+      trail.style.left = x + 'px';
+      trail.style.top = y + 'px';
+      document.body.appendChild(trail);
+      
+      // 0.6秒后移除轨迹元素
+      setTimeout(() => {
+        if (trail.parentNode) {
+          trail.parentNode.removeChild(trail);
+        }
+      }, 600);
+    }
+
+    // 鼠标离开页面时隐藏坐标
+    document.addEventListener('mouseleave', function() {
+      mouseLocation.classList.remove('show');
+      isMouseMoving = false;
+    });
+
+  </script>
+</body>
+</html>

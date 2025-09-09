@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOVIE - RHB</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      overflow: hidden;
+    }
+
+    .fullscreen-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 1000;
+    }
+
+    .close-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+  </style>
+</head>
+<body>
+  <!-- 全屏视频播放器 -->
+  <video id="fullscreenVideo" class="fullscreen-video" autoplay controls muted>
+    <source src="movie/RHB_full.mp4" type="video/mp4">
+    您的浏览器不支持视频播放。
+  </video>
+
+  <!-- 关闭按钮 -->
+  <button class="close-btn" onclick="closeVideo()">&times;</button>
+
+  <script>
+    const video = document.getElementById('fullscreenVideo');
+
+    // 关闭视频，返回上一页
+    function closeVideo() {
+      window.history.back();
+    }
+
+    // 键盘控制
+    document.addEventListener('keydown', function(e) {
+      switch(e.key) {
+        case 'Escape':
+          closeVideo();
+          break;
+      }
+    });
+
+    // 视频结束
+    video.addEventListener('ended', function() {
+      // video.currentTime = 0;
+      // video.play();
+    });
+  </script>
+</body>
+</html>

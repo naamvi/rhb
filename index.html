@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RHB – Sculptural Footwear</title>
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  
+  <style>
+    /* 炫酷鼠标坐标显示 */
+    .mouse-location {
+      position: fixed;
+      top: 10px;
+      left: 170px;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #fff;
+      font-family: 'NimbusMono', monospace;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      z-index: 1000;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    }
+
+    .mouse-location.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mouse-location .coords {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .mouse-location .coord-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mouse-location .coord-label {
+      color: #888;
+      font-size: 10px;
+      text-transform: uppercase;
+    }
+
+    .mouse-location .coord-value {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .mouse-location .pulse {
+      width: 6px;
+      height: 6px;
+      background: #fff;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* 鼠标轨迹效果 */
+    .mouse-trail {
+      position: fixed;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 999;
+      animation: trailFade 0.6s ease-out forwards;
+    }
+
+    @keyframes trailFade {
+      0% { opacity: 1; transform: scale(1); }
+      100% { opacity: 0; transform: scale(0.3); }
+    }
+  </style>
+  
+</head>
+<body>
+ 
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="hamburger" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    <a href="/" class="logo">
+      <img src="images/logo.png" alt="RHB Logo" style="max-height: 80px;">
+    </a>
+    <div class="mouse-location" id="mouseLocation">
+      <div class="coords">
+        <div class="coord-item">
+          <div class="pulse"></div>
+          <div class="coord-label">X</div>
+          <div class="coord-value" id="mouseX">0</div>
+        </div>
+        <div class="coord-item">
+          <div class="pulse"></div>
+          <div class="coord-label">Y</div>
+          <div class="coord-value" id="mouseY">0</div>
+        </div>
+      </div>
+    </div>
+
+
+    </div>
+    <div class="nav-right">
+      <button class="nav-ic" aria-label="Search">
+        <!-- Magnifier icon -->
+        <svg width="21" height="21" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="9" r="7"/><path d="M15 15l5 5"/></svg>
+      </button>
+      <button class="nav-ic" aria-label="Account">
+        <!-- Account icon -->
+        <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="7.5" r="4.5"/><path d="M21 20c0-4-4.5-7-10-7s-10 3-10 7"/></svg>
+      </button>
+      <button class="nav-ic" aria-label="Cart">
+        <!-- Cart icon -->
+        <svg width="23" height="23" fill="none" stroke="#fff" stroke-width="2"><circle cx="9" cy="20" r="2"/><circle cx="19" cy="20" r="2"/><path d="M1 1h3l2.7 13a2 2 0 0 0 2 1.7h9a2 2 0 0 0 2-1.7l2-9.3H6"/></svg>
+      </button>
+    </div>
+  </nav>
+  <!-- 菜单抽屉 -->
+  <div class="menu-drawer" id="menuDrawer">
+    <a class="menu-link" href="index.html">Home</a>
+    <a class="menu-link" href="https://shop.rhb.co.com">Shop</a>
+    <a class="menu-link" href="lookbook.html">Gallery</a>
+    <a class="menu-link" href="contact.html">Contact</a>
+    <a class="menu-link" href="about.html">About Us</a>
+    <!-- Login/Register链接 -->
+    <a class="drawer-menu__link fs-body-base fs-body-large-ns" href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2"> 
+      Login/Register 
+    </a>
+    
+    <!-- Instagram链接 -->
+    <div class="instagram-container">
+      <a href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2" title="Antidote の Instagram" target="_blank" class="instagram-link"> 
+        <span class="icon"> 
+          <svg width="100%" viewBox="0 0 24 24"> 
+            <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" fill="currentColor"></path> 
+          </svg> 
+        </span> 
+      </a>
+    </div>
+  </div>
+  
+
+  <!-- slides: indeximg图片滑动循环播放 -->
+<div class="hero-slider" id="heroSlider">
+  <!-- Slide 1 -->
+  <div class="slide active" style="background-image:url('indeximg/1.png')">
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide" style="background-image:url('indeximg/2.jpg')">
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide" style="background-image:url('indeximg/3.jpg')">
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide" style="background-image:url('indeximg/4.jpg')">
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide" style="background-image:url('indeximg/5.jpg')">
+  </div>
+
+
+</div>
+
+ 
+  <script>
+    // HERO SLIDER
+const slides = document.querySelectorAll('.slide');
+let curIdx = 0, timer;
+
+
+
+function showSlide(idx) {
+  curIdx = idx;
+  slides.forEach((s, i) => s.classList.toggle('active', i === curIdx));
+}
+
+function nextSlide() {
+  curIdx = (curIdx + 1) % slides.length;
+  showSlide(curIdx);
+}
+
+// 自动循环播放
+function startAutoSlide() {
+  timer = setInterval(nextSlide, 3000); // 每3秒切换一次
+}
+
+function stopAutoSlide() {
+  if (timer) {
+    clearInterval(timer);
+    timer = null;
+  }
+}
+
+const menuBtn = document.getElementById('menuBtn');
+const menuDrawer = document.getElementById('menuDrawer');
+let menuOpen = false;
+
+// 点击按钮开关菜单
+menuBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  menuOpen = !menuOpen;
+  menuDrawer.classList.toggle('active', menuOpen);
+});
+
+// 点菜单任何地方关闭菜单
+menuDrawer.addEventListener('click', function(e) {
+  menuDrawer.classList.remove('active');
+  menuOpen = false;
+  e.stopPropagation();
+});
+
+// 按ESC关闭菜单
+document.addEventListener('keydown', function(e) {
+  if (e.key === "Escape" && menuOpen) {
+    menuDrawer.classList.remove('active');
+    menuOpen = false;
+  }
+});
+
+
+
+showSlide(curIdx);  // 初始化
+
+// 启动自动播放
+startAutoSlide();
+
+// 炫酷鼠标坐标追踪
+const mouseLocation = document.getElementById('mouseLocation');
+const mouseX = document.getElementById('mouseX');
+const mouseY = document.getElementById('mouseY');
+let isMouseMoving = false;
+let mouseTimeout;
+
+// 鼠标移动事件
+document.addEventListener('mousemove', function(e) {
+  // 更新坐标
+  mouseX.textContent = e.clientX;
+  mouseY.textContent = e.clientY;
+  
+  // 显示坐标面板
+  if (!isMouseMoving) {
+    mouseLocation.classList.add('show');
+    isMouseMoving = true;
+  }
+  
+  // 创建鼠标轨迹效果
+  createMouseTrail(e.clientX, e.clientY);
+  
+  // 清除之前的定时器
+  clearTimeout(mouseTimeout);
+  
+  // 设置隐藏定时器
+  mouseTimeout = setTimeout(() => {
+    mouseLocation.classList.remove('show');
+    isMouseMoving = false;
+  }, 2000);
+});
+
+// 创建鼠标轨迹效果
+function createMouseTrail(x, y) {
+  const trail = document.createElement('div');
+  trail.className = 'mouse-trail';
+  trail.style.left = x + 'px';
+  trail.style.top = y + 'px';
+  document.body.appendChild(trail);
+  
+  // 0.6秒后移除轨迹元素
+  setTimeout(() => {
+    if (trail.parentNode) {
+      trail.parentNode.removeChild(trail);
+    }
+  }, 600);
+}
+
+// 鼠标离开页面时隐藏坐标
+document.addEventListener('mouseleave', function() {
+  mouseLocation.classList.remove('show');
+  isMouseMoving = false;
+});
+
+  </script>
+</body>
+</html>

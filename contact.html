@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact RHB</title>
+   <link rel="icon" href="favicon.png" type="image/png" /> 
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="responsive.css">
+  </head>
+<body>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <button class="hamburger" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" fill="none" stroke="#fff" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+      <a href="./" class="logo">
+        <img src="images/logo.png" alt="RHB Logo" style="max-height: 80px;">
+      </a>
+    </div>
+  </nav>
+  <div class="menu-drawer" id="menuDrawer">
+    <a class="menu-link" href="index.html">Home</a>
+    <a class="menu-link" href="https://shop.rhb.co.com">Shop</a>
+    <a class="menu-link" href="lookbook.html">Gallery</a>
+    <a class="menu-link" href="contact.html">Contact</a>
+    <a class="menu-link" href="about.html">About Us</a>
+    <!-- Login/Register链接 -->
+    <a class="drawer-menu__link fs-body-base fs-body-large-ns" href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2"> 
+      Login/Register 
+    </a>
+    
+    <!-- Instagram链接 -->
+    <div class="instagram-container">
+      <a href="https://www.instagram.com/_rhb.official?igsh=cjN3bWh1cWxqc2h2" title="Antidote の Instagram" target="_blank" class="instagram-link"> 
+        <span class="icon"> 
+          <svg width="100%" viewBox="0 0 24 24"> 
+            <path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z" fill="currentColor"></path> 
+          </svg> 
+        </span> 
+      </a>
+    </div>
+  </div>
+
+  <!-- 联系方式内容 -->
+  <div class="contact-wrap">
+    <div class="contact-title">Contact Us</div>
+    <div class="contact-desc">
+      Leave us a message for collaboration, bulk purchase, or any inquiries.<br>
+    </div>
+    <form class="contact-form" autocomplete="off" name="contact" method="POST" data-netlify="true">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email" required>
+      <textarea name="message" placeholder="Message " required></textarea>
+      <button class="contact-btn" type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- 菜单JS -->
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDrawer = document.getElementById('menuDrawer');
+    let menuOpen = false;
+    menuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuOpen = !menuOpen;
+      menuDrawer.classList.toggle('active', menuOpen);
+    });
+    menuDrawer.addEventListener('click', function(e) {
+      menuDrawer.classList.remove('active');
+      menuOpen = false;
+      e.stopPropagation();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape" && menuOpen) {
+        menuDrawer.classList.remove('active');
+        menuOpen = false;
+      }
+    });
+  </script>
+</body>
+</html>

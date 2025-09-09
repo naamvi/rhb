@@ -1,0 +1,42 @@
+/* 响应式设计 */
+@media (max-width: 900px) {
+  .navbar { padding: 0 10px;}
+  .nav-left, .nav-right { gap: 18px;}
+  .lookbook-title { font-size:2.0rem;}
+  .lookbook-gallery { gap: 18px; }
+}
+@media (max-width: 700px) {
+  .slide-txt { font-size:1.35rem; max-width: 98vw; }
+  .menu-drawer { padding: 80px 18px 28px 18px;}
+  .menu-drawer .menu-link { font-size: 1.14rem; }
+  .drawer-menu__link {
+    left: 18px;
+    bottom: 40%;
+    font-size: 0.61rem;
+  }
+  .instagram-container {
+    left: 18px;
+    bottom: 38%;
+  }
+}
+@media (max-width: 600px){
+  .contact-wrap {padding:18px 7vw 24px 7vw;}
+  .contact-title{font-size:1.3rem;}
+  .menu-drawer .menu-link { font-size: 0.93rem; }
+  .drawer-menu__link {
+    left: 12px;
+    font-size: 0.54rem;
+    bottom: 35%;
+  }
+  .instagram-container {
+    left: 12px;
+    bottom: 33%;
+  }
+  .instagram-link .icon {
+    width: 28px;
+    height: 28px;
+  }
+}
+@media (max-width: 500px){
+  .lookbook-gallery { padding:0 2vw 36px 2vw;}
+}

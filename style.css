@@ -1,0 +1,375 @@
+/* CSS变量定义 */
+:root {
+  --black: #181818;
+  --white: #fff;
+  --gray: #b8b8b8;
+  --header-h: 60px;
+}
+
+/* 字体定义 */
+@font-face {
+  font-family: 'NimbusMono';
+  src: url('nimbus-mono/NimbusMono-Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NimbusMono';
+  src: url('nimbus-mono/NimbusMono-Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NimbusMono';
+  src: url('nimbus-mono/NimbusMono-Oblique.otf') format('opentype');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'NimbusMono';
+  src: url('nimbus-mono/NimbusMono-BoldOblique.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* 基础样式 */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--black);
+  color: var(--white);
+  font-family: 'NimbusMono', monospace;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  overflow-x: hidden;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  transition: background 0.5s;
+}
+
+/* 导航栏 */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: var(--header-h);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  padding: 0 36px;
+  box-sizing: border-box;
+  transition: background 0.3s, backdrop-filter 0.3s;
+}
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.logo {
+  font-family: 'NimbusMono', monospace;
+  font-size: 2.1rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--white);
+  cursor: pointer;
+  user-select: none;
+}
+.logo img {
+  margin-top: 15px;
+  margin-left: -25px;
+  height: 110%;
+  width: 110px;
+}
+
+
+/* 汉堡菜单与菜单抽屉 */
+.hamburger {
+  width: 38px; height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 999;
+  position: relative;
+}
+.hamburger svg {
+  display: block;
+  width: 24px;
+  height: 24px;
+  transition: 0.3s;
+}
+.menu-drawer {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(24, 24, 24, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  z-index: 30;
+  display: none;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 80px 48px 48px 48px;
+  animation: menuFade 0.4s;
+}
+.menu-drawer.active { display: flex; }
+.menu-drawer .menu-link {
+  color: var(--white);
+  font-size: 1.57rem;
+  font-family: 'NimbusMono', monospace;
+  font-weight: 600;
+  margin: 0 0 18px 0;
+  opacity: 0.92;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s;
+  position: relative;
+  display: inline-block;
+}
+.menu-drawer .menu-link:hover { 
+  color: var(--gray); 
+}
+.menu-drawer .menu-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background-color: var(--white);
+  transition: width 0.3s ease;
+}
+.menu-drawer .menu-link:hover::after,
+.menu-drawer .menu-link.active::after {
+  width: 100%;
+}
+.menu-drawer .menu-link.active {
+  color: var(--white);
+  opacity: 1;
+}
+
+.drawer-menu__link {
+  color: var(--white);
+  font-size: 0.79rem;
+  font-family: 'NimbusMono', monospace;
+  font-weight: 600;
+  margin: 0 0 20px 0;
+  opacity: 0.85;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: color 0.2s, opacity 0.2s;
+  display: block;
+  position: absolute;
+  bottom: 48%;
+  left: 48px;
+  transform: translateY(50%);
+}
+.drawer-menu__link:hover {
+  color: var(--gray);
+  opacity: 1;
+}
+.instagram-container {
+  position: absolute;
+  bottom: 46%;
+  left: 48px;
+  transform: translateY(50%);
+}
+.instagram-link {
+  display: inline-block;
+  color: var(--white);
+  opacity: 0.8;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  text-decoration: none;
+}
+.instagram-link:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+.instagram-link .icon {
+  display: block;
+  width: 32px;
+  height: 32px;
+}
+.instagram-link svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+@keyframes menuFade {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* 首页轮播图 */
+.hero-slider {
+  width: 100vw; height: 100vh;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: #111;
+}
+.slide {
+  position: absolute;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: #000;
+  background-position: center;
+  background-size: cover;
+  opacity: 0;
+  transition: opacity 1s cubic-bezier(.33,1,.68,1);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.slide.active { opacity: 1; z-index: 2; }
+::-webkit-scrollbar { width: 0px; background: transparent;}
+
+/* Lookbook页面 */
+.lookbook-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 90px 8vw 36px 8vw;
+}
+.lookbook-title, .movie-link {
+  font-family: 'NimbusMono', monospace;
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  font-weight: 400;
+  color: #fff;
+  margin: 0;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+}
+.movie-link {
+  text-decoration: none;
+}
+
+
+.lookbook-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 34px;
+  padding: 0 8vw 64px 8vw;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+.lookbook-img {
+  width: 100%;
+  border-radius: 0;
+  box-shadow: 0 10px 32px 0 rgba(0,0,0,0.22);
+  transition: transform 0.35s cubic-bezier(.44,1.1,.62,1.1), box-shadow .4s;
+  object-fit: cover;
+  aspect-ratio: 4/5;
+  background: #222;
+  display: block;
+}
+.lookbook-img:hover {
+  transform: scale(1.04);
+  box-shadow: 0 24px 60px 2px rgba(0,0,0,0.37);
+}
+
+ 
+.contact-wrap {
+  max-width: 540px;
+  margin: 90px auto 0 auto;
+  background: rgba(40,40,40,0.91);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px 2px rgba(0,0,0,0.23);
+  padding: 42px 38px 38px 38px;
+}
+.contact-title, .about-title {
+  font-family: 'NimbusMono', monospace;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 18px;
+}
+.contact-title {
+  font-size: 2.2rem;
+  font-weight: 400;
+}
+.about-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+.about-desc, .contact-desc {
+  text-align: center;
+  font-size: 1.09rem;
+  color: #d4d4d4;
+  margin-bottom: 30px;
+  letter-spacing: 0.04em;
+}
+.about-desc {
+  font-weight: 400;
+}
+.contact-desc {
+  font-weight: 700;
+}
+.contact-form {
+  display: flex; flex-direction: column; gap: 20px;
+}
+.contact-form input, .contact-form textarea {
+  padding: 12px 14px;
+  background: #232323; color: #fff;
+  border: 1px solid #3d3d3d;
+  border-radius: 7px;
+  font-size: 1.06rem;
+  font-family: 'NimbusMono', monospace;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  outline: none;
+  transition: border .22s;
+}
+.contact-form input:focus, .contact-form textarea:focus {
+  border: 1.5px solid #fff;
+  background: #282828;
+}
+.contact-form textarea { min-height: 90px; resize: vertical; }
+.contact-btn {
+  margin-top: 16px;
+  padding: 12px 0;
+  background: linear-gradient(90deg, #222 30%, #fff 90%);
+  color: #181818;
+  border: none; border-radius: 7px;
+  font-size: 1.12rem;
+  font-family: 'NimbusMono', monospace;
+  font-weight: 400;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  transition: background 0.27s, color 0.19s;
+}
+.contact-btn:hover {
+  background: #fff; color: #111;
+}
+
+
+
+/* 导航图标样式 */
+.nav-ic {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0 !important;
+  margin: 0 0 0 18px !important; /* 保证按钮间距 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  cursor: pointer;
+}
+
+.nav-ic svg {
+  display: block;
+  background: none !important;
+  width: 23px;
+  height: 23px;
+}
