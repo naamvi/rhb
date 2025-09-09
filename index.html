@@ -171,19 +171,19 @@
   </div>
 
   <!-- Slide 2 -->
-  <div class="slide" style="background-image:url('indeximg/2.jpg')">
+  <div class="slide" data-bg="indeximg/2.jpg">
   </div>
 
   <!-- Slide 3 -->
-  <div class="slide" style="background-image:url('indeximg/3.jpg')">
+  <div class="slide" data-bg="indeximg/3.jpg">
   </div>
 
   <!-- Slide 4 -->
-  <div class="slide" style="background-image:url('indeximg/4.jpg')">
+  <div class="slide" data-bg="indeximg/4.jpg">
   </div>
 
   <!-- Slide 5 -->
-  <div class="slide" style="background-image:url('indeximg/5.jpg')">
+  <div class="slide" data-bg="indeximg/5.jpg">
   </div>
 
 
@@ -247,7 +247,47 @@ document.addEventListener('keydown', function(e) {
 
 
 
+// 懒加载：仅当需要时为幻灯片设置背景图
+function preloadSlideBackground(index) {
+  const slide = slides[index];
+  if (!slide) return;
+  if (slide.dataset.loaded === '1') return;
+  const bgUrl = slide.dataset.bg;
+  if (!bgUrl) {
+    slide.dataset.loaded = '1';
+    return; // 已有背景或无可加载资源
+  }
+  const img = new Image();
+  img.src = bgUrl;
+  img.decoding = 'async';
+  img.loading = 'eager';
+  img.onload = function () {
+    slide.style.backgroundImage = "url('" + bgUrl + "')";
+    slide.dataset.loaded = '1';
+  };
+}
+
+// 预加载当前与下一张，确保切换顺滑
+function primeInitialSlides() {
+  preloadSlideBackground(curIdx);
+  const nextIdx = (curIdx + 1) % slides.length;
+  preloadSlideBackground(nextIdx);
+}
+
+// 覆盖 nextSlide，在切换前确保下一张已加载
+const _nextSlideInternal = nextSlide;
+nextSlide = function () {
+  const upcoming = (curIdx + 1) % slides.length;
+  preloadSlideBackground(upcoming);
+  _nextSlideInternal();
+  // 预加载下一张的下一张
+  const afterUpcoming = (upcoming + 1) % slides.length;
+  preloadSlideBackground(afterUpcoming);
+};
+
+// 首屏初始化与启动
 showSlide(curIdx);  // 初始化
+primeInitialSlides();
 
 // 启动自动播放
 startAutoSlide();
