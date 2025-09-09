@@ -192,159 +192,156 @@
  
   <script>
     // HERO SLIDER
-const slides = document.querySelectorAll('.slide');
-let curIdx = 0, timer;
-
-
-
-function showSlide(idx) {
-  curIdx = idx;
-  slides.forEach((s, i) => s.classList.toggle('active', i === curIdx));
-}
-
-function nextSlide() {
-  curIdx = (curIdx + 1) % slides.length;
-  showSlide(curIdx);
-}
-
-// 自动循环播放
-function startAutoSlide() {
-  timer = setInterval(nextSlide, 3000); // 每3秒切换一次
-}
-
-function stopAutoSlide() {
-  if (timer) {
-    clearInterval(timer);
-    timer = null;
-  }
-}
-
-const menuBtn = document.getElementById('menuBtn');
-const menuDrawer = document.getElementById('menuDrawer');
-let menuOpen = false;
-
-// 点击按钮开关菜单
-menuBtn.addEventListener('click', function(e) {
-  e.stopPropagation();
-  menuOpen = !menuOpen;
-  menuDrawer.classList.toggle('active', menuOpen);
-});
-
-// 点菜单任何地方关闭菜单
-menuDrawer.addEventListener('click', function(e) {
-  menuDrawer.classList.remove('active');
-  menuOpen = false;
-  e.stopPropagation();
-});
-
-// 按ESC关闭菜单
-document.addEventListener('keydown', function(e) {
-  if (e.key === "Escape" && menuOpen) {
-    menuDrawer.classList.remove('active');
-    menuOpen = false;
-  }
-});
-
-
-
-// 懒加载：仅当需要时为幻灯片设置背景图
-function preloadSlideBackground(index) {
-  const slide = slides[index];
-  if (!slide) return;
-  if (slide.dataset.loaded === '1') return;
-  const bgUrl = slide.dataset.bg;
-  if (!bgUrl) {
-    slide.dataset.loaded = '1';
-    return; // 已有背景或无可加载资源
-  }
-  const img = new Image();
-  img.src = bgUrl;
-  img.decoding = 'async';
-  img.loading = 'eager';
-  img.onload = function () {
-    slide.style.backgroundImage = "url('" + bgUrl + "')";
-    slide.dataset.loaded = '1';
-  };
-}
-
-// 预加载当前与下一张，确保切换顺滑
-function primeInitialSlides() {
-  preloadSlideBackground(curIdx);
-  const nextIdx = (curIdx + 1) % slides.length;
-  preloadSlideBackground(nextIdx);
-}
-
-// 覆盖 nextSlide，在切换前确保下一张已加载
-const _nextSlideInternal = nextSlide;
-nextSlide = function () {
-  const upcoming = (curIdx + 1) % slides.length;
-  preloadSlideBackground(upcoming);
-  _nextSlideInternal();
-  // 预加载下一张的下一张
-  const afterUpcoming = (upcoming + 1) % slides.length;
-  preloadSlideBackground(afterUpcoming);
-};
-
-// 首屏初始化与启动
-showSlide(curIdx);  // 初始化
-primeInitialSlides();
-
-// 启动自动播放
-startAutoSlide();
-
-// 炫酷鼠标坐标追踪
-const mouseLocation = document.getElementById('mouseLocation');
-const mouseX = document.getElementById('mouseX');
-const mouseY = document.getElementById('mouseY');
-let isMouseMoving = false;
-let mouseTimeout;
-
-// 鼠标移动事件
-document.addEventListener('mousemove', function(e) {
-  // 更新坐标
-  mouseX.textContent = e.clientX;
-  mouseY.textContent = e.clientY;
-  
-  // 显示坐标面板
-  if (!isMouseMoving) {
-    mouseLocation.classList.add('show');
-    isMouseMoving = true;
-  }
-  
-  // 创建鼠标轨迹效果
-  createMouseTrail(e.clientX, e.clientY);
-  
-  // 清除之前的定时器
-  clearTimeout(mouseTimeout);
-  
-  // 设置隐藏定时器
-  mouseTimeout = setTimeout(() => {
-    mouseLocation.classList.remove('show');
-    isMouseMoving = false;
-  }, 2000);
-});
-
-// 创建鼠标轨迹效果
-function createMouseTrail(x, y) {
-  const trail = document.createElement('div');
-  trail.className = 'mouse-trail';
-  trail.style.left = x + 'px';
-  trail.style.top = y + 'px';
-  document.body.appendChild(trail);
-  
-  // 0.6秒后移除轨迹元素
-  setTimeout(() => {
-    if (trail.parentNode) {
-      trail.parentNode.removeChild(trail);
+    const slides = document.querySelectorAll('.slide');
+    let curIdx = 0, timer;
+    function showSlide(idx) {
+      curIdx = idx;
+      slides.forEach((s, i) => s.classList.toggle('active', i === curIdx));
     }
-  }, 600);
-}
 
-// 鼠标离开页面时隐藏坐标
-document.addEventListener('mouseleave', function() {
-  mouseLocation.classList.remove('show');
-  isMouseMoving = false;
-});
+    function nextSlide() {
+      curIdx = (curIdx + 1) % slides.length;
+      showSlide(curIdx);
+    }
+
+    // 自动循环播放
+    function startAutoSlide() {
+      timer = setInterval(nextSlide, 3000); // 每3秒切换一次
+    }
+
+    function stopAutoSlide() {
+      if (timer) {
+        clearInterval(timer);
+        timer = null;
+      }
+    }
+
+    const menuBtn = document.getElementById('menuBtn');
+    const menuDrawer = document.getElementById('menuDrawer');
+    let menuOpen = false;
+
+    // 点击按钮开关菜单
+    menuBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      menuOpen = !menuOpen;
+      menuDrawer.classList.toggle('active', menuOpen);
+    });
+
+    // 点菜单任何地方关闭菜单
+    menuDrawer.addEventListener('click', function(e) {
+      menuDrawer.classList.remove('active');
+      menuOpen = false;
+      e.stopPropagation();
+    });
+
+    // 按ESC关闭菜单
+    document.addEventListener('keydown', function(e) {
+      if (e.key === "Escape" && menuOpen) {
+        menuDrawer.classList.remove('active');
+        menuOpen = false;
+      }
+    });
+
+
+
+    // 懒加载：仅当需要时为幻灯片设置背景图
+    function preloadSlideBackground(index) {
+      const slide = slides[index];
+      if (!slide) return;
+      if (slide.dataset.loaded === '1') return;
+      const bgUrl = slide.dataset.bg;
+      if (!bgUrl) {
+        slide.dataset.loaded = '1';
+        return; // 已有背景或无可加载资源
+      }
+      const img = new Image();
+      img.src = bgUrl;
+      img.decoding = 'async';
+      img.loading = 'eager';
+      img.onload = function () {
+        slide.style.backgroundImage = "url('" + bgUrl + "')";
+        slide.dataset.loaded = '1';
+      };
+    }
+
+    // 预加载当前与下一张，确保切换顺滑
+    function primeInitialSlides() {
+      preloadSlideBackground(curIdx);
+      const nextIdx = (curIdx + 1) % slides.length;
+      preloadSlideBackground(nextIdx);
+    }
+
+    // 覆盖 nextSlide，在切换前确保下一张已加载
+    const _nextSlideInternal = nextSlide;
+    nextSlide = function () {
+      const upcoming = (curIdx + 1) % slides.length;
+      preloadSlideBackground(upcoming);
+      _nextSlideInternal();
+      // 预加载下一张的下一张
+      const afterUpcoming = (upcoming + 1) % slides.length;
+      preloadSlideBackground(afterUpcoming);
+    };
+
+    // 首屏初始化与启动
+    showSlide(curIdx);  // 初始化
+    primeInitialSlides();
+
+    // 启动自动播放
+    startAutoSlide();
+
+    // 炫酷鼠标坐标追踪
+    const mouseLocation = document.getElementById('mouseLocation');
+    const mouseX = document.getElementById('mouseX');
+    const mouseY = document.getElementById('mouseY');
+    let isMouseMoving = false;
+    let mouseTimeout;
+
+    // 鼠标移动事件
+    document.addEventListener('mousemove', function(e) {
+      // 更新坐标
+      mouseX.textContent = e.clientX;
+      mouseY.textContent = e.clientY;
+      
+      // 显示坐标面板
+      if (!isMouseMoving) {
+        mouseLocation.classList.add('show');
+        isMouseMoving = true;
+      }
+      
+      // 创建鼠标轨迹效果
+      createMouseTrail(e.clientX, e.clientY);
+      
+      // 清除之前的定时器
+      clearTimeout(mouseTimeout);
+      
+      // 设置隐藏定时器
+      mouseTimeout = setTimeout(() => {
+        mouseLocation.classList.remove('show');
+        isMouseMoving = false;
+      }, 2000);
+    });
+
+    // 创建鼠标轨迹效果
+    function createMouseTrail(x, y) {
+      const trail = document.createElement('div');
+      trail.className = 'mouse-trail';
+      trail.style.left = x + 'px';
+      trail.style.top = y + 'px';
+      document.body.appendChild(trail);
+      
+      // 0.6秒后移除轨迹元素
+      setTimeout(() => {
+        if (trail.parentNode) {
+          trail.parentNode.removeChild(trail);
+        }
+      }, 600);
+    }
+
+    // 鼠标离开页面时隐藏坐标
+    document.addEventListener('mouseleave', function() {
+      mouseLocation.classList.remove('show');
+      isMouseMoving = false;
+    });
 
   </script>
 </body>
