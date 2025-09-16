@@ -235,7 +235,7 @@ html, body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 90px 8vw 36px 8vw;
+  margin: 90px 8vw 30px 8vw;
 }
 .lookbook-title, .movie-link {
   font-family: 'NimbusMono', monospace;
@@ -279,9 +279,9 @@ html, body {
 .contact-wrap {
   max-width: 540px;
   margin: 90px auto 0 auto;
-  background: rgba(40,40,40,0.91);
+  /* background: rgba(40,40,40,0.91); */
   border-radius: 18px;
-  box-shadow: 0 8px 28px 2px rgba(0,0,0,0.23);
+  /* box-shadow: 0 8px 28px 2px rgba(0,0,0,0.23); */
   padding: 42px 38px 38px 38px;
 }
 .contact-title, .about-title {

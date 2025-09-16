@@ -15,9 +15,8 @@
       background-color: #000;
     }
     .swiper-container {
-      width: 100%;
-      max-width: 600px;
-      height: 100vh;
+      width: 65vh;
+      height: 75vh;
       background: #000;
     }
 
@@ -35,8 +34,7 @@
       opacity: .5;
     }
     .swiper-thumbs {
-      width: 100%;
-      max-width: 600px;
+      width: 65vh;
       height: 120px;
       margin: 20px auto;
       overflow: hidden;
@@ -44,7 +42,7 @@
 
     .swiper-thumbs img{
       width: 100%;
-      height: 15vh;
+      height: 12vh;
       object-fit: cover;
       opacity: 0.6;
       transition: opacity 0.3s;
@@ -63,6 +61,32 @@
       width: 15px !important;;
       height: 35px !important;;
       background-size: 15px 35px !important;;
+    }
+
+    .swiper-button-prev{
+      position: fixed;
+      left: 20px;
+    }
+
+    .swiper-button-next{
+      position: fixed;
+      right: 20px;
+    }
+
+    /* 屏幕左右点击区域 */
+    .screen-click-left, .screen-click-right {
+      position: fixed;
+      top: 0;
+      width: 50vw;
+      height: 100vh;
+      z-index: 1;
+      cursor: pointer;
+    }
+    .screen-click-left {
+      left: 0;
+    }
+    .screen-click-right {
+      right: 0;
     }
 
   </style>
@@ -144,23 +168,60 @@
   <div class="swiper-container">
       <div class="swiper-wrapper">
           <div class="swiper-slide">
-            <img src="images/000_2510.jpg" alt="Look 1" />
+            <img src="images2/1.jpg" alt="Look 1" />
           </div>
           <div class="swiper-slide">
-            <img src="images/000_2551.jpg" alt="Look 2" />
+            <img src="images2/2.jpg" alt="Look 2" />
           </div>
           <div class="swiper-slide">
-            <img src="images/000_2345.jpg" alt="Look 3" />
+            <img src="images2/3.jpg" alt="Look 3" />
           </div>
           <div class="swiper-slide">
-            <img src="images/000_2368.jpg" alt="Look 4" />
+            <img src="images2/4.jpg" alt="Look 4" />
           </div>
           <div class="swiper-slide">
-            <img src="images/000_2124.jpg" alt="Look 5" />
+            <img src="images2/5.jpg" alt="Look 5" />
           </div>
           <div class="swiper-slide">
-            <img src="images/000_2183.jpg" alt="Look 6" />
+            <img src="images2/6.jpg" alt="Look 6" />
           </div>
+          <div class="swiper-slide">
+            <img src="images2/7.jpg" alt="Look 7" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/8.jpg" alt="Look 8" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/9.jpg" alt="Look 9" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/10.jpg" alt="Look 10" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/11.jpg" alt="Look 11" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/12.jpg" alt="Look 12" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/13.jpg" alt="Look 13" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/14.jpg" alt="Look 14" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/15.jpg" alt="Look 15" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/16.jpg" alt="Look 16" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/17.jpg" alt="Look 17" />
+          </div>
+          <div class="swiper-slide">
+            <img src="images2/18.jpg" alt="Look 18" />
+          </div>
+          
       </div>
       <!-- 如果需要分页器 -->
       <div class="swiper-pagination"></div>
@@ -171,26 +232,69 @@
       
   </div>
 
+  <!-- 屏幕左右点击区域 -->
+  <div class="screen-click-left" id="screenClickLeft"></div>
+  <div class="screen-click-right" id="screenClickRight"></div>
+
   <div class="swiper-thumbs">
     <div class="swiper-wrapper">
         <div class="swiper-slide">
-          <img src="images/000_2510.jpg" alt="Look 1" />
+          <img src="images2/1.jpg" alt="Look 1" />
         </div>
         <div class="swiper-slide">
-          <img src="images/000_2551.jpg" alt="Look 2" />
+          <img src="images2/2.jpg" alt="Look 2" />
         </div>
         <div class="swiper-slide">
-          <img src="images/000_2345.jpg" alt="Look 3" />
+          <img src="images2/3.jpg" alt="Look 3" />
         </div>
         <div class="swiper-slide">
-          <img src="images/000_2368.jpg" alt="Look 4" />
+          <img src="images2/4.jpg" alt="Look 4" />
         </div>
         <div class="swiper-slide">
-          <img src="images/000_2124.jpg" alt="Look 5" />
+          <img src="images2/5.jpg" alt="Look 5" />
         </div>
         <div class="swiper-slide">
-          <img src="images/000_2183.jpg" alt="Look 6" />
+          <img src="images2/6.jpg" alt="Look 6" />
         </div>
+        <div class="swiper-slide">
+          <img src="images2/7.jpg" alt="Look 7" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/8.jpg" alt="Look 8" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/9.jpg" alt="Look 9" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/10.jpg" alt="Look 10" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/11.jpg" alt="Look 11" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/12.jpg" alt="Look 12" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/13.jpg" alt="Look 13" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/14.jpg" alt="Look 14" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/15.jpg" alt="Look 15" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/16.jpg" alt="Look 16" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/17.jpg" alt="Look 17" />
+        </div>
+        <div class="swiper-slide">
+          <img src="images2/18.jpg" alt="Look 18" />
+        </div>
+        
+
+        
     </div>
 </div>
 <script src="swiper.min.js"> </script>
@@ -229,6 +333,18 @@
 
       slider.controller.control = thumbs;
       thumbs.controller.control = slider;
+
+      // 屏幕左右点击区域事件
+      const screenClickLeft = document.getElementById('screenClickLeft');
+      const screenClickRight = document.getElementById('screenClickRight');
+      
+      screenClickLeft.addEventListener('click', function() {
+        slider.slidePrev();
+      });
+      
+      screenClickRight.addEventListener('click', function() {
+        slider.slideNext();
+      });
     // });
 
     
