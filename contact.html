@@ -22,6 +22,31 @@
       <a href="./" class="logo">
         <img src="images/logo.png" alt="RHB Logo" style="max-height: 80px;">
       </a>
+      <div class="radar-indicator" id="radarIndicator" aria-hidden="true">
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="3" fill="#fff"/>
+          <g id="radar-ru">
+            <path class="arc ru arc1" d="M100 100 m 30 0 A30 30 0 0 0 100 70"/>
+            <path class="arc ru arc2" d="M100 100 m 60 0 A60 60 0 0 0 100 40"/>
+            <path class="arc ru arc3" d="M100 100 m 90 0 A90 90 0 0 0 100 10"/>
+          </g>
+          <g id="radar-rd">
+            <path class="arc rd arc1" d="M100 100 m 30 0 A30 30 0 0 1 100 130"/>
+            <path class="arc rd arc2" d="M100 100 m 60 0 A60 60 0 0 1 100 160"/>
+            <path class="arc rd arc3" d="M100 100 m 90 0 A90 90 0 0 1 100 190"/>
+          </g>
+          <g id="radar-lu">
+            <path class="arc lu arc1" d="M100 100 m -30 0 A30 30 0 0 1 100 70"/>
+            <path class="arc lu arc2" d="M100 100 m -60 0 A60 60 0 0 1 100 40"/>
+            <path class="arc lu arc3" d="M100 100 m -90 0 A90 90 0 0 1 100 10"/>
+          </g>
+          <g id="radar-ld">
+            <path class="arc ld arc1" d="M100 100 m -30 0 A30 30 0 0 0 100 130"/>
+            <path class="arc ld arc2" d="M100 100 m -60 0 A60 60 0 0 0 100 160"/>
+            <path class="arc ld arc3" d="M100 100 m -90 0 A90 90 0 0 0 100 190"/>
+          </g>
+        </svg>
+      </div>
     </div>
   </nav>
   <div class="menu-drawer" id="menuDrawer">
@@ -80,6 +105,33 @@
       if (e.key === "Escape" && menuOpen) {
         menuDrawer.classList.remove('active');
         menuOpen = false;
+      }
+    });
+    // 雷达：仅显示鼠标所在象限，最多3条弧线
+    document.addEventListener('mousemove', function(e){
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      const dx = e.clientX - cx;
+      const dy = e.clientY - cy;
+      const radius = Math.sqrt(dx*dx + dy*dy);
+      const maxR = Math.sqrt(cx*cx + cy*cy);
+      const level = Math.min(3, Math.max(0, Math.ceil((radius / maxR) * 3)));
+      let activeId = '', cls = '';
+      if (dx >= 0 && dy < 0) { activeId = 'radar-ru'; cls = 'ru'; }
+      else if (dx >= 0 && dy >= 0) { activeId = 'radar-rd'; cls = 'rd'; }
+      else if (dx < 0 && dy < 0) { activeId = 'radar-lu'; cls = 'lu'; }
+      else { activeId = 'radar-ld'; cls = 'ld'; }
+      ['radar-ru','radar-rd','radar-lu','radar-ld'].forEach(function(id){
+        const g = document.getElementById(id);
+        if (!g) return;
+        g.querySelectorAll('.arc').forEach(function(p){ p.style.opacity = '0'; });
+      });
+      const gActive = document.getElementById(activeId);
+      if (gActive) {
+        for (let i = 1; i <= level; i++) {
+          const p = gActive.querySelector('.' + cls + '.arc' + i);
+          if (p) p.style.opacity = '1';
+        }
       }
     });
   </script>
